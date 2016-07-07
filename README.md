@@ -33,10 +33,14 @@ var assert = require('assert')
 
 _memento_ stores log data in a [LevelUP].  The examples in this file
 use a LevelUP backed by [memdown], an in-memory storage back-end.
+You could also use [LevelDOWN], [LeveUP]'s default, disk-persisted,
+log-structured-merge-tree-based store.
 
 [LevelUP]: https://npmjs.com/packages/levelup
 
 [memdown]: https://npmjs.com/packages/memdown
+
+[LevelDOWN]: https://npmjs.com/packages/leveldown
 
 ```javascript
 var Memento = require('memento')
