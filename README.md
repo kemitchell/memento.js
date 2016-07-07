@@ -31,12 +31,15 @@ var assert = require('assert')
 
 ### Initialization
 
-_memento_ stores log data in a [LevelUP].  The examples in this file
-use a LevelUP backed by [memdown], an in-memory storage back-end.
-You could also use [LevelDOWN], [LeveUP]'s default, disk-persisted,
-log-structured-merge-tree-based store.
+_memento_ stores log data in a [LevelUP].  The LevelUP must be able
+to encode string keys and nested `Object` values.
 
 [LevelUP]: https://npmjs.com/packages/levelup
+
+The examples in this file use a LevelUP with JSON-encoded values
+backed by [memdown], an in-memory storage back-end.  You could
+also use [LevelDOWN], [LevelUP]'s default, disk-persisted,
+log-structured-merge-tree-based store.
 
 [memdown]: https://npmjs.com/packages/memdown
 
