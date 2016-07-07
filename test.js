@@ -70,7 +70,7 @@ tape('rewind', function (test) {
           log.set('c', 'cat', function () {
             log.unset('c', function () {
               var buffer = []
-              log.rewind()
+              log.createRewindStream()
               .on('data', function (entry) { buffer.push(entry) })
               .once('error', function (error) { test.fail(error) })
               .once('end', function () {

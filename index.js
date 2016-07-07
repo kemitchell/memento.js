@@ -11,7 +11,7 @@ function Memento (levelup) {
   this._log = new SimpleLog(levelup)
 }
 
-Memento.prototype.rewind = function (to) {
+Memento.prototype.createRewindStream = function (to) {
   var self = this
   var seen = new Trie()
   return pump(
