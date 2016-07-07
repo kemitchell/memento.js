@@ -17,6 +17,9 @@
     "tape": "^4.6.0",
     "trie-hard": "^0.1.0"
   },
+  "files": [
+    "index.js"
+  ],
   "license": "MIT",
   "repository": "kemitchell/memento.js",
   "scripts": {
