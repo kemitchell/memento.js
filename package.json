@@ -8,10 +8,12 @@
     "through2": "^2.0.1"
   },
   "devDependencies": {
+    "defence-cli": "^2.0.0",
     "dezalgo": "^1.0.3",
     "level-simple-log": "^1.0.0",
     "levelup": "^1.3.2",
     "memdown": "^1.2.0",
+    "replace-require-self": "^1.1.1",
     "run-series": "^1.1.4",
     "standard": "^7.1.2",
     "tape": "^4.6.0",
@@ -24,6 +26,6 @@
   "repository": "kemitchell/memento.js",
   "scripts": {
     "lint": "standard",
-    "test": "node test.js"
+    "test": "defence --info javascript README.md | replace-require-self | node"
   }
 }
