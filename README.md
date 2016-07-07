@@ -8,7 +8,7 @@ entries from newest to oldest.  As the log rewinds, it keeps track of
 the keys for which it has seen values and drops superseded entries,
 so every rewind compacts the log.
 
-Memento supports four abstract operations:
+Memento supports five abstract operations:
 
 1. Set a key to a value on the log. Very quick.
 2. Unset the value of a key on the log.  Very quick.
