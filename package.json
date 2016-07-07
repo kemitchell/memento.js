@@ -1,0 +1,25 @@
+{
+  "name": "memento",
+  "description": "self-compacting, reverse-order log of key-value deltas",
+  "version": "0.0.0",
+  "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
+  "dependencies": {
+    "pump": "^1.0.1",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "dezalgo": "^1.0.3",
+    "level-simple-log": "^1.0.0",
+    "levelup": "^1.3.2",
+    "memdown": "^1.2.0",
+    "standard": "^7.1.2",
+    "tape": "^4.6.0",
+    "trie-hard": "^0.1.0"
+  },
+  "license": "MIT",
+  "repository": "kemitchell/memento.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "node test.js"
+  }
+}
