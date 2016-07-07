@@ -58,7 +58,7 @@ function testInstance () {
 
 ### Setting Values
 ```javascript
-(function set () {
+;(function set () {
   var log = testInstance()
   log.set('a', 'apple', function (error, index) {
     assert.ifError(error, 'no error')
