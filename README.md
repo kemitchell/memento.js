@@ -135,6 +135,10 @@ var runSeries = require('run-series')
 ```javascript
 ;(function () {
   var log = testInstance()
+  var expected = [
+    {index: 4, key: 'b', value: 'ball'},
+    {index: 2, key: 'a', value: 'atom'}
+  ]
   runSeries([
     log.set.bind(log, 'a', 'apple'),
     log.set.bind(log, 'a', 'atom'),
@@ -146,16 +150,60 @@ var runSeries = require('run-series')
       var buffer = []
       log.createRewindStream()
       .on('data', function (entry) { buffer.push(entry) })
-      .once('error', function (error) { assert.fail(error) })
+      .once('error', function (error) { assert.ifError(error) })
       .once('end', function () {
-        assert.deepEqual(
-          buffer,
-          [
-            {index: 4, key: 'b', value: 'ball'},
-            {index: 2, key: 'a', value: 'atom'}
-          ],
-          'rewinds compacted log'
-        )
+        assert.deepEqual(buffer, expected, 'rewinds compacted log')
+        done()
+      })
+    },
+```
+
+Rewinding again, without additional set or unset operations, will
+not trigger compaction.
+
+```javascript
+    function (done) {
+      var buffer = []
+      log.createRewindStream()
+      .on('data', function (entry) { buffer.push(entry) })
+      .once('compacted', function () { assert.fail('compacted again') })
+      .once('error', function (error) { assert.ifError(error) })
+      .once('end', function () {
+        assert.deepEqual(buffer, expected, 'rewinds compacted log')
+        done()
+      })
+    },
+```
+
+Nor will setting an entirely new key.
+
+```javascript
+    log.set.bind(log, 'x', 'xylophone'),
+    function (done) {
+      log.createRewindStream()
+      .on('data', function () { })
+      .once('compacted', function () { this.compacted = true })
+      .once('error', function (error) { assert.ifError(error) })
+      .once('end', function () {
+        console.error('got here')
+        assert(this.compacted, undefined, 'did not recompact')
+        done()
+      })
+    },
+```
+
+But setting an existing key will trigger compaction on next rewind.
+
+```javascript
+    log.set.bind(log, 'x', 'xanthum'),
+    function (done) {
+      log.createRewindStream()
+      .on('data', function () { })
+      .once('compacted', function () { this.compacted = true })
+      .once('error', function (error) { assert.ifError(error) })
+      .once('end', function () {
+        assert.equal(this.compacted, true, 'recompacted')
+        console.log('got here')
         done()
       })
     }
