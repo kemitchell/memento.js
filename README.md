@@ -20,7 +20,7 @@ Memento supports four abstract operations:
 
 [trie]: https://npmjs.com/packages/trie-hard
 
----
+## API Examples
 
 The following examples are also the package's test suite, using
 Node.js' built-in `assert` module.
@@ -29,7 +29,7 @@ Node.js' built-in `assert` module.
 var assert = require('assert')
 ```
 
-## Initialization
+### Initialization
 
 _memento_ stores log data in a [LevelUP].  The examples in this file
 use a LevelUP backed by [memdown], an in-memory storage back-end.
@@ -49,7 +49,7 @@ function testInstance () {
 }
 ```
 
-# Setting Values
+### Setting Values
 ```javascript
 (function set () {
   var log = testInstance()
@@ -60,7 +60,7 @@ function testInstance () {
 })()
 ```
 
-## Reading Values
+### Reading Values
 ```javascript
 var runSeries = require('run-series')
 
@@ -88,7 +88,7 @@ var runSeries = require('run-series')
 })()
 ```
 
-## Unset
+### Unset
 ``javascript
 ;(function unset () {
   var log = testInstance()
@@ -106,7 +106,7 @@ var runSeries = require('run-series')
 })()
 ```
 
-## Head
+### Head
 ```javascript
 ;(function () {
   var log = testInstance()
@@ -124,7 +124,7 @@ var runSeries = require('run-series')
 })()
 ```
 
-## Rewind
+### Rewind
 ```javascript
 ;(function () {
   var log = testInstance()
