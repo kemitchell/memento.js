@@ -96,7 +96,7 @@ var runSeries = require('run-series')
 ```
 
 ### Unset
-``javascript
+```javascript
 ;(function unset () {
   var log = testInstance()
   runSeries([
