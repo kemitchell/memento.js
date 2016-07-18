@@ -1,7 +1,7 @@
 {
   "name": "revlog",
   "description": "self-compacting, reverse-order log of key-value deltas",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
   "dependencies": {
     "dezalgo": "^1.0.3",
