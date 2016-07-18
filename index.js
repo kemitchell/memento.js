@@ -4,14 +4,14 @@ var dezalgo = require('dezalgo')
 var pump = require('pump')
 var through = require('through2')
 
-module.exports = Memento
+module.exports = RevLog
 
-function Memento (levelup) {
-  if (!(this instanceof Memento)) return new Memento(levelup)
+function RevLog (levelup) {
+  if (!(this instanceof RevLog)) return new RevLog(levelup)
   this._log = new SimpleLog(levelup)
 }
 
-Memento.prototype.createRewindStream = function (to) {
+RevLog.prototype.createRewindStream = function (to) {
   var self = this
   var seen = new Trie()
   return pump(
@@ -38,19 +38,19 @@ Memento.prototype.createRewindStream = function (to) {
   )
 }
 
-Memento.prototype.set = function (key, value, callback) {
+RevLog.prototype.set = function (key, value, callback) {
   callback = dezalgo(callback)
   if (!validKey(key)) callback(new Error('invalid key'))
   else this._log.append({type: 'set', key: key, value: value}, callback)
 }
 
-Memento.prototype.unset = function (key, callback) {
+RevLog.prototype.unset = function (key, callback) {
   callback = dezalgo(callback)
   if (!validKey(key)) callback(new Error('invalid key'))
   else this._log.append({type: 'unset', key: key}, callback)
 }
 
-Memento.prototype.read = function (key, callback) {
+RevLog.prototype.read = function (key, callback) {
   this._log.createReverseStream()
   .on('data', function (data) {
     var entry = data.entry
@@ -63,7 +63,7 @@ Memento.prototype.read = function (key, callback) {
   .once('end', function () { callback(null, undefined) })
 }
 
-Memento.prototype.head = function (callback) {
+RevLog.prototype.head = function (callback) {
   this._log.head(callback)
 }
 

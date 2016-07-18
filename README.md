@@ -2,13 +2,13 @@ Append-only logs are a nifty way to share key-value data.
 Unfortunately, append-only logs grow forever.  Compacting can be
 tricky, especially at the same time you're trying to share.
 
-_memento_ stores delta-encoded key-value data in an append-only log.
+_revlog_ stores delta-encoded key-value data in an append-only log.
 Rather than _replay_ entries from oldest to newest, clients _rewind_
 entries from newest to oldest.  As the log rewinds, it keeps track of
 the keys for which it has seen values and drops superseded entries,
 so every rewind compacts the log.
 
-Memento supports five abstract operations:
+RevLog supports five abstract operations:
 
 1. Set a key to a value on the log. Very quick.
 2. Unset the value of a key on the log.  Very quick.
@@ -31,7 +31,7 @@ var assert = require('assert')
 
 ### Initialization
 
-_memento_ stores log data in a [LevelUP].  The LevelUP must be able
+_revlog_ stores log data in a [LevelUP].  The LevelUP must be able
 to encode string keys and nested `Object` values.
 
 [LevelUP]: https://npmjs.com/packages/levelup
@@ -46,13 +46,13 @@ log-structured-merge-tree-based store.
 [LevelDOWN]: https://npmjs.com/packages/leveldown
 
 ```javascript
-var Memento = require('memento')
+var RevLog = require('revlog')
 var levelup = require('levelup')
 var memdown = require('memdown')
 
 function testInstance () {
   memdown.clearGlobalStore()
-  return new Memento(levelup('', {db: memdown, valueEncoding: 'json'}))
+  return new RevLog(levelup('', {db: memdown, valueEncoding: 'json'}))
 }
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "memento",
+  "name": "revlog",
   "description": "self-compacting, reverse-order log of key-value deltas",
   "version": "0.0.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
@@ -23,7 +23,7 @@
     "index.js"
   ],
   "license": "MIT",
-  "repository": "kemitchell/memento.js",
+  "repository": "kemitchell/revlog.js",
   "scripts": {
     "lint": "npm run lint:readme && npm run lint:source",
     "lint:readme": "! defence --info javascript README.md | standard --stdin --verbose 2>/dev/null | grep -F -v 'no-multiple-empty-lines' | grep -F -v 'standardjs.com'",
